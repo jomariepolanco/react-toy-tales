@@ -9,13 +9,14 @@ import ToyContainer from './components/ToyContainer'
 class App extends React.Component{
 
   state = {
+    apiResponse: [],
     display: false
   }
 
   componentDidMount(){
     fetch('http://localhost:3000/toys')
     .then(r => r.json())
-    .then()
+    .then(data => this.setState({apiResponse: data}))
   }
 
   handleClick = () => {
@@ -38,7 +39,7 @@ class App extends React.Component{
         <div className="buttonContainer">
           <button onClick={this.handleClick}> Add a Toy </button>
         </div>
-        <ToyContainer/>
+        <ToyContainer toyArray={this.state.apiResponse}/>
       </>
     );
   }

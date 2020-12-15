@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 class ToyCard extends Component {
 
   render() {
+    console.log(this.props.toyObj)
     return (
       <div className="card">
         <h2>{'' /* Toy's Name */}</h2>
