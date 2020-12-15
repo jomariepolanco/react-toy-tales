@@ -26,13 +26,27 @@ class App extends React.Component{
     })
   }
 
+  addNewToyHandler = (toyObj) => {
+    toyObj.likes = 0
+    fetch('http://localhost:3000/toys', {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Accepts": "application/json"
+      },
+      body: JSON.stringify(toyObj)
+    })
+    .then(r => r.json())
+    .then(newToyObj => this.setState({apiResponse: [...this.state.apiResponse, newToyObj]}))
+  }
+
   render(){
     return (
       <>
         <Header/>
         { this.state.display
             ?
-          <ToyForm/>
+          <ToyForm addNewToy={this.addNewToyHandler} />
             :
           null
         }
