@@ -12,6 +12,12 @@ class App extends React.Component{
     display: false
   }
 
+  componentDidMount(){
+    fetch('http://localhost:3000/toys')
+    .then(r => r.json())
+    .then()
+  }
+
   handleClick = () => {
     let newBoolean = !this.state.display
     this.setState({
