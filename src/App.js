@@ -26,6 +26,21 @@ class App extends React.Component{
     })
   }
 
+  deleteToy = (id) => {
+    fetch(`http://localhost:3000/toys/${id}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        "Accepts": "application/json"
+      }
+    })
+    .then(r => r.json())
+    .then(() => {
+      const newArray = this.state.apiResponse.filter(toy => toy.id !== id)
+      this.setState({apiResponse: newArray})
+    })
+  }
+
   addNewToyHandler = (toyObj) => {
     toyObj.likes = 0
     fetch('http://localhost:3000/toys', {
@@ -53,7 +68,7 @@ class App extends React.Component{
         <div className="buttonContainer">
           <button onClick={this.handleClick}> Add a Toy </button>
         </div>
-        <ToyContainer toyArray={this.state.apiResponse}/>
+        <ToyContainer deleteToy={this.deleteToy} toyArray={this.state.apiResponse}/>
       </>
     );
   }
